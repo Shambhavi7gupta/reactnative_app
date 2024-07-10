@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Star from "react-native-star-view";
 
 const ProductList = () => {
   const [categories, setCategories] = useState([]);
@@ -127,8 +128,11 @@ const ProductList = () => {
                 </TouchableOpacity>
                 <Text style={styles.productTitle}>{item.title}</Text>
                 <Text style={styles.productDetails}>{item.category}</Text>
+                <View style={styles.ratingContainer}>
+                  <Star score={item.rating.rate} style={styles.starStyle} />
+                  <Text style={styles.ratingCount}>({item.rating.count})</Text>
+                </View>
                 <Text style={styles.productPrice}>{item.price}</Text>
-                <Text style={styles.productRate}>{item.rate}</Text>
               </View>
             )}
             keyExtractor={(item, index) => index.toString()}
@@ -239,6 +243,21 @@ const styles = StyleSheet.create({
   productRate: {
     color: "#888",
     fontSize: 20,
+  },
+  starStyle: {
+    width: 100,
+    height: 20,
+    marginBottom: 0,
+  },
+  ratingContainer: {
+    marginTop: 5,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ratingCount: {
+    marginLeft: 2,
+    fontSize: 10,
   },
 });
 
